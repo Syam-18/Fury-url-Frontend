@@ -19,12 +19,8 @@ export default function NavigationBar() {
     router.push('/login')
   };
   useEffect(() => {
-    const token = Cookies.get("token");
 
     const getProfileData = async () => {
-      if (!token) {
-        return;
-      }
       const profiledata = await getProfile();
       setProfile(profiledata.user);
     };

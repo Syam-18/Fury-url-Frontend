@@ -32,6 +32,7 @@ export async function middleware(request: NextRequest) {
   }
 
   if (!token && !isPublic) {
+    return NextResponse.redirect(new URL("/login", request.url))
   }
 
   return NextResponse.next();

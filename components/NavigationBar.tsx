@@ -14,34 +14,23 @@ export default function NavigationBar() {
   const pathname = usePathname();
   const router = useRouter();
   const [profile, setProfile] = useState<Profile>({email: "user@gmail.com", username: "username"})
-  const [isLogggedIn, setIsLoggedIn] = useState(false)
   const handleLogout = () => {
     Cookies.remove("token")
     router.push('/login')
   };
   useEffect(() => {
+    const token = Cookies.get("token");
+
     const getProfileData = async () => {
+      if (!token) {
+        return;
+      }
       const profiledata = await getProfile();
       setProfile(profiledata.user);
-      const token = Cookies.get("token");
-      if (token) setIsLoggedIn(true);
     };
+
     getProfileData();
-  },[])
-  if(!isLogggedIn){
-    return (
-      <Popover>
-        <PopoverContent className="w-44 p-2 bg-[#0f172a] border border-[#1e293b]">
-            <button
-              onClick={() => router.push('/login')}
-              className="px-3 py-1 text-sm rounded-md hover:bg-[#1e293b] text-left text-red-400"
-            >
-              Login
-            </button>
-        </PopoverContent>
-      </Popover>
-    );
-  }
+  }, []);
   return (
     <div className="absolute top-6 md:top-10 right-6 md:right-28 flex items-center gap-4">
       {/* History Button */}

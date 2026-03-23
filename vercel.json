@@ -1,29 +1,17 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "next.config.ts",
-      "use": "@vercel/next"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
-  ],
   "rewrites": [
     {
       "source": "/login",
-      "destination": "/app/login/page"
+      "destination": "/login"
     },
     {
       "source": "/history",
-      "destination": "/app/history/page"
+      "destination": "/history"
+    },
+    {
+      "source": "/:slug",
+      "destination": "/api/resolve?slug=:slug"
     }
   ],
   "redirects": [

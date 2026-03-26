@@ -59,7 +59,7 @@ export default function AuthPage() {
         {/* TITLE */}
         <div className="text-center mb-6">
           <h1 className="text-4xl font-extrabold bg-linear-to-r from-[#22d3ee] via-[#a855f7] to-[#f472b6] bg-clip-text text-transparent">
-            furyUrl
+            furyurl
           </h1>
 
           <p className="text-[#6b7280] mt-2">

@@ -63,7 +63,7 @@ export default function NavigationBar() {
 
             <button
               onClick={handleLogout}
-              className="px-3 py-1 text-sm rounded-md hover:bg-[#1e293b] text-left text-red-400"
+              className="px-3 py-1 text-sm rounded-md hover:bg-[#1e293b] text-left text-red-400 cursor-pointer"
             >
               Logout
             </button>

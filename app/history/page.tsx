@@ -46,11 +46,11 @@ export default function HistoryPage() {
       <div className="w-full max-w-2xl">
         {/* TITLE */}
         <div className="text-center mb-14">
-          <h1 className="text-4xl font-extrabold bg-linear-to-r from-[#22d3ee] via-[#a855f7] to-[#f472b6] bg-clip-text text-transparent">
+          <h1 className="text-2xl md:text-4xl font-extrabold bg-linear-to-r from-[#22d3ee] via-[#a855f7] to-[#f472b6] bg-clip-text text-transparent">
             URL History
           </h1>
 
-          <p className="text-[#6b7280] mt-3">Previously shortened links</p>
+          <p className="text-[#6b7280] mt-2 md:mt-3">Previously shortened links</p>
         </div>
 
         <div className="space-y-4">

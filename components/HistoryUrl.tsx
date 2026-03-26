@@ -32,36 +32,27 @@ export default function HistoryUrl({
 
   return (
     <div
-      className="
-      flex items-center justify-between
-      bg-[#11111a]
-      border border-[#2a2a3a]
-      rounded
-      px-5 py-4
-      hover:bg-[#161622]
-      hover:border-[hsl(271,49%,65%)]
-      transition
-    "
+      className="flex justify-between items-center bg-[#11111a] hover:bg-[#161622] p-3 md:px-5 md:py-4 border border-[#2a2a3a] hover:border-[hsl(271,49%,65%)] rounded transition"
     >
       {/* URL INFO */}
       <div className="flex flex-col">
         <a
-          className="text-[#c7d2fe] text-md md:text-lg font-semidbold hover:underline cursor-pointer"
+          className="font-semidbold text-[#c7d2fe] text-md md:text-lg hover:underline cursor-pointer"
           href={`https://furyurl.onrender.com/${short}`}
           target="_blank"
         >
           furyurl.onrender.com/{short}
         </a>
-        <div className="overflow-x-auto w-[50vw] md:w-[45vw] lg:w-[45vw] xl:w-[35vw] scrollbar-hide">
+        <div className="w-[50vw] md:w-[45vw] lg:w-[45vw] xl:w-[35vw] overflow-x-auto scrollbar-hide">
           <a
-            className="text-[#6b7280] text-sm md:text-md truncate cursor-pointer hover:underline"
+            className="text-[#6b7280] md:text-md text-sm hover:underline truncate cursor-pointer"
             title={original}
             href={original}
           >
             {original}
           </a>
         </div>
-        <div className="flex gap-4 text-[10px] md:text-[12px] font-medium text-[#6b7280] mt-3">
+        <div className="flex gap-4 mt-2 md:mt-3 font-medium text-[#6b7280] text-[10px] md:text-[12px]">
           <div className="flex items-center gap-1">
             <Calendar size={12} />
             {new Date(createdAt).toLocaleString("en-IN", {

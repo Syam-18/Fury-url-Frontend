@@ -41,7 +41,7 @@ export default function Home() {
 
   const handleShorten = async (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if(!url.trim()) return
+    if (!url.trim()) return;
     setIsShortUrlLoading(true);
     if (!url) return;
 
@@ -50,13 +50,13 @@ export default function Home() {
       setIsShortUrlLoading(false);
       setShortUrl(data.shortUrl);
     } catch (err) {
-      setIsShortUrlLoading(false)
-      setShortUrl("Try Again")
+      setIsShortUrlLoading(false);
+      setShortUrl("Try Again");
       console.error(err);
     }
   };
 
-  const deleteItem = async(id: string) => {
+  const deleteItem = async (id: string) => {
     try {
       setHistory((prev) => prev.filter((url) => url._id !== id));
       await deleteUrl(id);
@@ -68,27 +68,25 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#0b0b12] text-white flex justify-center px-6 pt-20 pb-10 relative">
-      <NavigationBar/>
+      <NavigationBar />
 
       <div className="w-full max-w-2xl">
         {/* TITLE */}
-        <div className="text-center mb-14">
-          <h1 className="text-4xl font-extrabold bg-linear-to-r from-[#22d3ee] via-[#a855f7] to-[#f472b6] bg-clip-text text-transparent">
+        <div className="text-center mb-6 md:mb-14 ">
+          <h1 className="text-2xl md:text-4xl font-extrabold bg-linear-to-r from-[#22d3ee] via-[#a855f7] to-[#f472b6] bg-clip-text text-transparent">
             furyurl
           </h1>
 
-          <p className="text-[#6b7280] mt-3">
-          Fast • Minimal • URL Shortener
-        </p>
+          <p className="text-[#6b7280] text-sm md:text-3 md:mt-3">Fast • Minimal • URL Shortener</p>
         </div>
 
         {/* INPUT CARD */}
         <form
           onSubmit={handleShorten}
-          className="bg-[#11111a] border border-[#2a2a3a] rounded-md p-4 px-3 shadow-[0_0_30px_rgba(34,211,238,0.05)]"
+          className="bg-[#11111a] border border-[#2a2a3a] rounded-md p-2 md:p-4 md:px-3 shadow-[0_0_30px_rgba(34,211,238,0.05)]"
         >
-          <div className="flex gap-3">
-            <div className="flex items-center px-3 text-[#22d3ee]">
+          <div className="flex gap-1 md:gap-3">
+            <div className="flex items-center px-1 md:px-3 text-[#22d3ee] md:flex">
               <Link2 size={16} />
             </div>
 
@@ -96,12 +94,13 @@ export default function Home() {
               value={url}
               onChange={(e) => setUrl(e.target.value)}
               placeholder="Paste your URL"
-              className="flex-1 md:text-lg bg-transparent outline-none placeholder-[#6b7280]"
+              className="flex-1 text-sm md:text-lg bg-transparent outline-none placeholder-[#6b7280]"
             />
 
             <button
               className="
-            px-4 py-2 rounded-md
+              px-2 py-1
+            md:px-4 md:py-2 rounded-md
             bg-linear-to-r from-[#22d3ee] to-[#a855f7]
             transition
             flex items-center gap-2
@@ -115,8 +114,8 @@ export default function Home() {
         </form>
 
         {/* SHORTENED URL */}
-        <div className="mt-10">
-          <p className="text-xs uppercase tracking-widest text-[#6b7280] mb-3">
+        <div className="mt-6 md:mt-10">
+          <p className="text-xs uppercase tracking-widest text-[#6b7280] mb-2 md:mb-3">
             Shortened URL
           </p>
 
@@ -126,7 +125,7 @@ export default function Home() {
           bg-[#11111a]
           border border-[#2a2a3a]
           rounded-md
-          p-4
+          p-3 py-2 md:p-4
           hover:border-[#22d3ee]
           transition
           ${!shortUrl ? "cursor-not-allowed" : "cursor-pointer"}`}
@@ -137,7 +136,7 @@ export default function Home() {
                 <BarLoader color="#22d3ee" />
               </div>
             ) : (
-              <span className="text-[#c7d2fe]">
+              <span className="text-[#c7d2fe] text-sm md:text-[16px]">
                 {shortUrl ? shortUrl : "Shorten any url to copy"}
               </span>
             )}
@@ -149,8 +148,8 @@ export default function Home() {
         </div>
 
         {/* HISTORY */}
-        <div className="mt-12">
-          <div className="flex items-center gap-2 mb-5">
+        <div className="mt-6 md:mt-12">
+          <div className="flex items-center gap-2 mb-3 md:mb-5">
             <p className="text-xs uppercase tracking-widest text-[#6b7280]">
               History
             </p>
@@ -164,7 +163,9 @@ export default function Home() {
             ) : history.length === 0 ? (
               <p className="text-[#6b7280] text-sm">No URLs yet</p>
             ) : (
-              history.slice().reverse()
+              history
+                .slice()
+                .reverse()
                 .slice(0, 5)
                 .map((item) => (
                   <HistoryUrl

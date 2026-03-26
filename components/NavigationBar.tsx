@@ -56,7 +56,7 @@ export default function NavigationBar() {
           </button>
         </PopoverTrigger>
 
-        <PopoverContent className="w-44 p-2 bg-[#0f172a] border border-[#1e293b]">
+        <PopoverContent className="w-50 p-2 bg-[#0f172a] border border-[#1e293b]">
           <div className="flex flex-col">
             <p className="text-[hsl(0,0%,80%)] px-3 py-1">{profile.username}</p>
             <p className="text-[hsl(0,0%,80%)] px-3 py-1 pb-3">{profile.email}</p>

@@ -1,7 +1,6 @@
 import { History, Link2, User } from "lucide-react";
 import { PopoverContent, PopoverTrigger, Popover } from "./ui/popover";
 import { usePathname, useRouter } from "next/navigation";
-import Cookies from "js-cookie"
 import { useEffect, useState } from "react";
 import { getProfile } from "@/lib/userApi";
 

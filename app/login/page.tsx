@@ -24,21 +24,16 @@ export default function AuthPage() {
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if(!form.email.trim() || !form.password.trim()) return;
 
     try {
       if (mode === "login") {
-        console.log("Login data:", {
-          email: form.email,
-          password: form.password,
-        });
-
         await loginUser(form.email, form.password);
       } else {
         console.log("Register data:", form);
-
+        if(!form.name.trim()) return;
         await registerUser(form.name, form.email, form.password);
       }
-      console.log('abc')
       router.push("/");
     } catch (error) {
       console.error("Authentication failed:", error);

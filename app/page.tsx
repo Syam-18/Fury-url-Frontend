@@ -23,7 +23,6 @@ export default function Home() {
   useEffect(() => {
     const getUrl = async () => {
       const urls = await getMyUrls();
-      console.log(urls)
       setHistory(urls);
       setIsLoading(false);
     };

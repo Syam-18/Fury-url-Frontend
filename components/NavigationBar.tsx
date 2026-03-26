@@ -14,9 +14,13 @@ export default function NavigationBar() {
   const pathname = usePathname();
   const router = useRouter();
   const [profile, setProfile] = useState<Profile>({email: "user@gmail.com", username: "username"})
-  const handleLogout = () => {
-    Cookies.remove("token")
-    router.push('/login')
+  const handleLogout = async () => {
+    await fetch("/api/auth/remove-cookie", {
+      method: "POST",
+      credentials: "include",
+    });
+
+    router.push("/login");
   };
   useEffect(() => {
 

@@ -30,7 +30,7 @@ export default function Home() {
   }, []);
 
   const copyMain = () => {
-    if (shortUrl) navigator.clipboard.writeText(shortUrl);
+    if (shortUrl) navigator.clipboard.writeText(`furyurl.onrender.com/short`);
     else return;
     setCopiedMain(true);
 

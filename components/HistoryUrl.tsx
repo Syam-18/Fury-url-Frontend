@@ -22,7 +22,7 @@ export default function HistoryUrl({
 }: Props) {
   const [copied, setCopied] = useState(false);
   const copy = () => {
-    navigator.clipboard.writeText(`furyurl.onrender.com/short`);
+    navigator.clipboard.writeText(`furyurl.onrender.com/${short}`);
     setCopied(true);
 
     setTimeout(() => {

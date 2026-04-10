@@ -12,6 +12,7 @@ import { deleteUrl, getMyUrls, shortenUrl } from "@/lib/urlApi";
 export default function Home() {
   const [url, setUrl] = useState("");
   const [shortUrl, setShortUrl] = useState<string | null>(null);
+  const [pages, setPages] = useState<number>(0)
 
   const router = useRouter();
   const [copiedMain, setCopiedMain] = useState(false);
@@ -22,15 +23,16 @@ export default function Home() {
 
   useEffect(() => {
     const getUrl = async () => {
-      const urls = await getMyUrls();
-      setHistory(urls);
+      const urls = await getMyUrls(1);
+      setHistory(urls.data);
+      setPages(urls.totalPages)
       setIsLoading(false);
     };
     getUrl();
   }, []);
 
   const copyMain = () => {
-    if (shortUrl) navigator.clipboard.writeText(`furyurl.onrender.com/short`);
+    if (shortUrl) navigator.clipboard.writeText(shortUrl);
     else return;
     setCopiedMain(true);
 
@@ -183,7 +185,7 @@ export default function Home() {
 
         {/* FULL HISTORY */}
         <div
-          className={`flex justify-center mt-12 ${history.length <= 5 && "hidden"}`}
+          className={`flex justify-center mt-12 ${pages <= 1 && "hidden"}`}
         >
           <button
             onClick={() => router.push("/history")}

@@ -7,26 +7,36 @@ import NavigationBar from "@/components/NavigationBar";
 import { deleteUrl, getMyUrls } from "@/lib/urlApi";
 
 export type HistoryItem = {
-  _id: string;
-  originalUrl: string;
-  shortCode: string;
-  createdAt: string;
-  visitHistory: string;
+    _id: string;
+    originalUrl: string;
+    shortCode: string;
+    createdAt: string;
+    visitHistory: string;
+};
+
+export type HistoryResponse = {
+  data: HistoryItem[];
+  currentPage: number,
+  totalPages: number
+  totalUrls: number
 };
 
 export default function HistoryPage() {
   const [isLoading, setIsLoading] = useState(true)
+  const [pages, setPages] = useState<number>(0)
+  const [currentPage, setCurrentPage] = useState<number>(1)
 
   const [history, setHistory] = useState<HistoryItem[]>();
 
   useEffect(() => {
     const getUrl = async () => {
-      const urls = await getMyUrls();
-      setHistory(urls);
+      const urls = await getMyUrls(currentPage);
+      setHistory(urls.data);
+      setPages(urls.totalPages)
       setIsLoading(false)
     };
     getUrl();
-  }, []);
+  }, [currentPage]);
 
   const deleteItem = async(id: string) => {
       try {
@@ -40,17 +50,19 @@ export default function HistoryPage() {
 
 
   return (
-    <div className="min-h-screen bg-[#0b0b12] text-white flex justify-center px-6 pt-20 pb-10 relative">
+    <div className="relative flex justify-center bg-[#0b0b12] px-6 pt-20 pb-10 min-h-screen text-white">
       <NavigationBar />
 
       <div className="w-full max-w-2xl">
         {/* TITLE */}
-        <div className="text-center mb-14">
-          <h1 className="text-2xl md:text-4xl font-extrabold bg-linear-to-r from-[#22d3ee] via-[#a855f7] to-[#f472b6] bg-clip-text text-transparent">
+        <div className="mb-14 text-center">
+          <h1 className="bg-clip-text bg-linear-to-r from-[#22d3ee] via-[#a855f7] to-[#f472b6] font-extrabold text-transparent text-2xl md:text-4xl">
             URL History
           </h1>
 
-          <p className="text-[#6b7280] mt-2 md:mt-3">Previously shortened links</p>
+          <p className="mt-2 md:mt-3 text-[#6b7280]">
+            Previously shortened links
+          </p>
         </div>
 
         <div className="space-y-4">
@@ -70,11 +82,27 @@ export default function HistoryPage() {
                   original={item.originalUrl}
                   short={item.shortCode}
                   createdAt={item.createdAt}
-                  clicks={item.visitHistory?.length || 0} 
+                  clicks={item.visitHistory?.length || 0}
                   onDelete={() => deleteItem(item._id)}
                 />
               ))
           )}
+        </div>
+        <div className="flex justify-center items-center mt-4 gap-2">
+          <p className="mr-4 text-lg">Pages</p>
+          {[...Array(pages)].map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrentPage(i + 1)}
+              className={` p-1 rounded w-6 h-6 flex items-center justify-center cursor-pointer ${
+                currentPage === i + 1
+                  ? "bg-[hsl(0,0%,10%)] text-white border"
+                  : "bg-gray-100 text-black"
+              }`}
+            >
+              {i + 1}
+            </button>
+          ))}
         </div>
       </div>
     </div>

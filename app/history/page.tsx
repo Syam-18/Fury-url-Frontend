@@ -95,9 +95,9 @@ export default function HistoryPage() {
               key={i}
               onClick={() => setCurrentPage(i + 1)}
               className={` p-1 rounded w-6 h-6 flex items-center justify-center cursor-pointer ${
-                currentPage === i + 1
-                  ? "bg-[hsl(0,0%,10%)] text-white border"
-                  : "bg-gray-100 text-black"
+                currentPage !== i + 1
+                ? "bg-gray-100 text-black"
+                : "bg-[hsl(0,0%,10%)] text-white border"
               }`}
             >
               {i + 1}

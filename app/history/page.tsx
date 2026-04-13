@@ -75,7 +75,6 @@ export default function HistoryPage() {
           ) : (
             history
               ?.slice()
-              .reverse()
               .map((item) => (
                 <HistoryUrl
                   key={item.shortCode}

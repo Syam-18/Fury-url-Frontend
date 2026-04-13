@@ -167,7 +167,6 @@ export default function Home() {
             ) : (
               history
                 .slice()
-                .reverse()
                 .slice(0, 5)
                 .map((item) => (
                   <HistoryUrl

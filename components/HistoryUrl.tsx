@@ -48,6 +48,7 @@ export default function HistoryUrl({
             className="text-[#6b7280] md:text-md text-sm hover:underline truncate cursor-pointer"
             title={original}
             href={original}
+            target="_blank"
           >
             {original}
           </a>

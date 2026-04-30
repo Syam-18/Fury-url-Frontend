@@ -24,7 +24,13 @@ export default function Home() {
   const isValidUrl = (url: string) => {
     try {
       const parsed = new URL(url);
-      return parsed.protocol === "http:" || parsed.protocol === "https:";
+
+      return (
+        (parsed.protocol === "http:" || parsed.protocol === "https:") &&
+        parsed.hostname.includes(".") && // 👈 critical
+        !parsed.hostname.startsWith(".") &&
+        !parsed.hostname.endsWith(".")
+      );
     } catch {
       return false;
     }

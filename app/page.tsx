@@ -66,12 +66,13 @@ export default function Home() {
 
     if (!isValidUrl(normalized)) {
       setShortUrl("Expected a valid URL");
+      setIsShortUrlLoading(false);
       return;
     }
     
 
     try {
-      const data = await shortenUrl(url);
+      const data = await shortenUrl(normalized);
       setIsShortUrlLoading(false);
       setShortUrl(data.shortUrl);
     } catch (err) {

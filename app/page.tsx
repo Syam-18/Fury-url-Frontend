@@ -21,6 +21,22 @@ export default function Home() {
 
   const [history, setHistory] = useState<HistoryItem[]>([]);
 
+  const isValidUrl = (url: string) => {
+    try {
+      const parsed = new URL(url);
+      return parsed.protocol === "http:" || parsed.protocol === "https:";
+    } catch {
+      return false;
+    }
+  };
+
+  const normalizeUrl = (url: string) => {
+    if (!/^https?:\/\//i.test(url)) {
+      return "https://" + url;
+    }
+    return url;
+  };
+
   useEffect(() => {
     const getUrl = async () => {
       const urls = await getMyUrls(1);
@@ -45,7 +61,14 @@ export default function Home() {
     event.preventDefault();
     if (!url.trim()) return;
     setIsShortUrlLoading(true);
-    if (!url) return;
+
+    const normalized = normalizeUrl(url);
+
+    if (!isValidUrl(normalized)) {
+      setShortUrl("Expected a valid URL");
+      return;
+    }
+    
 
     try {
       const data = await shortenUrl(url);
